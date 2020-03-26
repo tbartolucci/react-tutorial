@@ -6,6 +6,7 @@ import UserOutput from './UserOutput/UserOutput';
 
 class App extends Component {
 
+    // example state
     state = {
         persons : [
             {name: 'Max', age: 28},
@@ -13,18 +14,11 @@ class App extends Component {
             {name: 'Lucas', age: 8}
         ],
         otherState: 'This is something else',
-        username : "Tom"
+        username : "Tom",
+        showPersons: false
     };
 
-    switchNameHandler = (newName) => {
-        // DONT DO THIS: this.state.persons[0].name = "Maximillion";
-        this.setState({ persons : [
-                {name: newName, age: 28},
-                {name: 'Tom', age: 40},
-                {name: 'Lucas', age: 8}
-            ]});
-    };
-
+    // On change event handler example for updating object
     nameChangedHandler = (event) => {
         // DONT DO THIS: this.state.persons[0].name = "Maximillion";
         this.setState({ persons : [
@@ -34,11 +28,18 @@ class App extends Component {
             ]});
     };
 
+    // input event handler for updating simple value in state
     usernameChangedHandler = (event) => {
         this.setState({ username : event.target.value });
     };
 
+    // button event handler example for simple toggle
+    togglePersonHandler = () => {
+        this.setState({ showPersons : !this.state.showPersons });
+    };
+
     render() {
+        // in-line style
         const style = {
             backgroundColor: 'white',
             font: 'inherit',
@@ -52,20 +53,24 @@ class App extends Component {
                 <p>{this.state.otherState}</p>
                 <button
                     style={style}
-                    onClick={this.switchNameHandler.bind(this,'Leo')}>
-                    Switch Name
+                    onClick={this.togglePersonHandler}>
+                    Toggle People
                 </button>
 
-                <Person
-                    name={this.state.persons[0].name}
-                    age={this.state.persons[0].age}/>
-                <Person
-                    name={this.state.persons[1].name}
-                    age={this.state.persons[1].age}
-                    change={this.nameChangedHandler}/>
-                <Person
-                    name={this.state.persons[2].name}
-                    age={this.state.persons[2].age}/>
+                { this.state.showPersons ?
+                    <div>
+                    <Person
+                        name={this.state.persons[0].name}
+                        age={this.state.persons[0].age}/>
+                    <Person
+                        name={this.state.persons[1].name}
+                        age={this.state.persons[1].age}
+                        change={this.nameChangedHandler}/>
+                    <Person
+                        name={this.state.persons[2].name}
+                        age={this.state.persons[2].age}/>
+                </div> : null
+                }
 
                     <UserInput username={this.state.username} changed={this.usernameChangedHandler}/>
                     <UserOutput username={this.state.username}/>
@@ -78,6 +83,3 @@ class App extends Component {
 }
 
 export default App;
-
-
-
