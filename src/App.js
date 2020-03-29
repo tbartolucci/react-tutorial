@@ -18,15 +18,14 @@ class App extends Component {
         showPersons: false
     };
 
-    // On change event handler example for updating object
-    nameChangedHandler = (event) => {
-        // DONT DO THIS: this.state.persons[0].name = "Maximillion";
-        this.setState({ persons : [
-                {name: event.target.value, age: 28},
-                {name: 'Tom', age: 40},
-                {name: 'Lucas', age: 8}
-            ]});
-    };
+    deletePersonHandler = (personIndex) => {
+        // Slice with no params creates a copy
+        //const persons = this.state.persons.slice();
+        // ES6 Spread
+        const persons = [...this.state.persons];
+        persons.splice(personIndex, 1);
+        this.setState({persons: persons});
+    }
 
     // input event handler for updating simple value in state
     usernameChangedHandler = (event) => {
@@ -51,16 +50,13 @@ class App extends Component {
         if ( this.state.showPersons ) {
             persons = (
                 <div>
-                    <Person
-                        name={this.state.persons[0].name}
-                        age={this.state.persons[0].age}/>
-                    <Person
-                        name={this.state.persons[1].name}
-                        age={this.state.persons[1].age}
-                        change={this.nameChangedHandler}/>
-                    <Person
-                        name={this.state.persons[2].name}
-                        age={this.state.persons[2].age}/>
+                    {this.state.persons.map((person,index) => {
+                        return (<Person
+                                click={() => this.deletePersonHandler(index)}
+                            name={person.name}
+                            age={person.age}/>
+                            );
+                    })}
                 </div>
             );
         }
