@@ -9,13 +9,33 @@ class App extends Component {
     // example state
     state = {
         persons : [
-            {name: 'Max', age: 28},
-            {name: 'Tom', age: 38},
-            {name: 'Lucas', age: 8}
+            {id: '1', name: 'Max', age: 28},
+            {id: '2', name: 'Tom', age: 38},
+            {id: '3', name: 'Lucas', age: 8}
         ],
         otherState: 'This is something else',
         username : "Tom",
         showPersons: false
+    };
+
+    nameChangeHandler = (event, id) => {
+        // Get the index of the p erson
+        const personIndex = this.state.persons.findIndex(p => {
+            return p.id === id;
+        });
+
+        // use spread to clone object into a new object to not mutate state
+        const person = {
+            ...this.state.persons[personIndex]
+        };
+
+        //set the name
+        person.name = event.target.value;
+        // clone the object
+        const persons = [...this.state.persons];
+        persons[personIndex] = person;
+        //set the state
+        this.setState({persons: persons})
     };
 
     deletePersonHandler = (personIndex) => {
@@ -25,7 +45,7 @@ class App extends Component {
         const persons = [...this.state.persons];
         persons.splice(personIndex, 1);
         this.setState({persons: persons});
-    }
+    };
 
     // input event handler for updating simple value in state
     usernameChangedHandler = (event) => {
@@ -54,7 +74,9 @@ class App extends Component {
                         return (<Person
                                 click={() => this.deletePersonHandler(index)}
                             name={person.name}
-                            age={person.age}/>
+                            age={person.age}
+                            key={person.id}
+                            changed={(event) => this.nameChangeHandler(event, person.id) }/>
                             );
                     })}
                 </div>
