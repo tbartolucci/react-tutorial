@@ -3,6 +3,8 @@ import './App.css';
 import Person from './Person/Person';
 import UserInput from './UserInput/UserInput';
 import UserOutput from './UserOutput/UserOutput';
+import ValidationComponent from './ValidationComponent/ValidationComponent';
+import CharComponent from './CharComponent/CharComponent';
 
 class App extends Component {
 
@@ -15,7 +17,9 @@ class App extends Component {
         ],
         otherState: 'This is something else',
         username : "Tom",
-        showPersons: false
+        showPersons: false,
+        textLength: 0,
+        textLengthString: ""
     };
 
     nameChangeHandler = (event, id) => {
@@ -57,6 +61,15 @@ class App extends Component {
         this.setState({ showPersons : !this.state.showPersons });
     };
 
+    textLengthHandler = (event) => {
+        this.setState( {textLength : event.target.value.length});
+        this.setState( { textLengthString: event.target.value});
+    };
+
+    charClickHandler = (event, index) => {
+
+    };
+
     render() {
         // in-line style
         const style = {
@@ -65,6 +78,16 @@ class App extends Component {
             border: '1px solid blue',
             padding: '8px'
         };
+
+        const stringItems = [];
+        if ( this.state.textLengthString.length > 0 ){
+            for( let i = 0; i < this.state.textLengthString.length; i++ ){
+                stringItems.push(<CharComponent
+                    click={this.charClickHandler}
+                    text={this.state.textLengthString[i]}
+                />);
+            }
+        }
 
         let persons = null;
         if ( this.state.showPersons ) {
@@ -86,6 +109,22 @@ class App extends Component {
         return (
             <div className="App">
                 <h1>React App</h1>
+                <h2>Assignment</h2>
+                <p><input
+                    type="text"
+                    onChange={this.textLengthHandler}
+                    value={this.state.textLengthString}
+                    placeholder="How long is this?"
+                />
+                </p>
+                <p>Count: {this.state.textLength}</p>
+                <ValidationComponent
+                    length={this.state.textLength}
+                />
+
+                {stringItems}
+
+                <h2>Lists and Handlers</h2>
                 <p>{this.state.otherState}</p>
                 <button
                     style={style}
