@@ -19,7 +19,7 @@ class App extends Component {
         username : "Tom",
         showPersons: false,
         textLength: 0,
-        textLengthString: ""
+        textLengthString: ''
     };
 
     nameChangeHandler = (event, id) => {
@@ -66,8 +66,11 @@ class App extends Component {
         this.setState( { textLengthString: event.target.value});
     };
 
-    charClickHandler = (event, index) => {
-
+    charClickHandler = (index) => {
+        const text = this.state.textLengthString.split('');
+        text.splice(index,1);
+        const updatedText = text.join('');
+        this.setState({textLengthString: updatedText, textLength: updatedText.length});
     };
 
     render() {
@@ -79,15 +82,12 @@ class App extends Component {
             padding: '8px'
         };
 
-        const stringItems = [];
-        if ( this.state.textLengthString.length > 0 ){
-            for( let i = 0; i < this.state.textLengthString.length; i++ ){
-                stringItems.push(<CharComponent
-                    click={this.charClickHandler}
-                    text={this.state.textLengthString[i]}
-                />);
-            }
-        }
+        const charList = this.state.textLengthString.split('').map((ch,index) => {
+            return (<CharComponent
+                    key={index}
+                    click={() => this.charClickHandler(index)}
+                    text={ch} />);
+        });
 
         let persons = null;
         if ( this.state.showPersons ) {
@@ -122,7 +122,7 @@ class App extends Component {
                     length={this.state.textLength}
                 />
 
-                {stringItems}
+                {charList}
 
                 <h2>Lists and Handlers</h2>
                 <p>{this.state.otherState}</p>
