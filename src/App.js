@@ -76,7 +76,7 @@ class App extends Component {
     render() {
         // in-line style
         const style = {
-            backgroundColor: 'white',
+            backgroundColor: 'green',
             font: 'inherit',
             border: '1px solid blue',
             padding: '8px'
@@ -104,11 +104,22 @@ class App extends Component {
                     })}
                 </div>
             );
+
+            style.backgroundColor = 'red';
+        }
+
+        const classes = [];
+        if ( this.state.persons.length <= 2 ){
+            classes.push('red'); // classes = ['red']
+        }
+        if ( this.state.persons.length <= 1 ){
+            classes.push('bold'); // classes = ['red', 'bold']
         }
 
         return (
             <div className="App">
                 <h1>React App</h1>
+                <p className={classes.join(' ')}>This is really working!</p>
                 <h2>Assignment</h2>
                 <p><input
                     type="text"
