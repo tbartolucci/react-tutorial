@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Radium from 'radium';
 import './App.css';
 import Person from './Person/Person';
 import UserInput from './UserInput/UserInput';
@@ -77,9 +78,15 @@ class App extends Component {
         // in-line style
         const style = {
             backgroundColor: 'green',
+            color: 'white',
             font: 'inherit',
             border: '1px solid blue',
-            padding: '8px'
+            padding: '8px',
+            cursor: 'pointer',
+            ':hover': {  // Radium lets you do this
+                backgroundColor: 'lightgreen',
+                color: 'black'
+            }
         };
 
         const charList = this.state.textLengthString.split('').map((ch,index) => {
@@ -106,6 +113,10 @@ class App extends Component {
             );
 
             style.backgroundColor = 'red';
+            style[':hover'] = {  // Radium feature
+                backgroundColor: 'salmon',
+                color: 'black'
+            }
         }
 
         const classes = [];
@@ -155,4 +166,4 @@ class App extends Component {
 
 }
 
-export default App;
+export default Radium(App);
