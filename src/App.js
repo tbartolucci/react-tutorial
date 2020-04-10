@@ -1,10 +1,26 @@
 import React, { Component } from 'react';
+import styled from 'styled-components';
 import './App.css';
 import Person from './Person/Person';
 import UserInput from './UserInput/UserInput';
 import UserOutput from './UserOutput/UserOutput';
 import ValidationComponent from './ValidationComponent/ValidationComponent';
 import CharComponent from './CharComponent/CharComponent';
+
+const StyledButton = styled.button`
+    background-color: ${props => props.alt ? 'red' : 'green' };
+    color: ${props => props.alt ? 'black' : 'white' };
+    font: inherit;
+    border: 1px solid blue;
+    padding: 8px;
+    cursor: pointer;
+    
+   &:hover {  
+        background-color: ${props => props.alt ? 'salmon' : 'lightgreen' };
+        color: ${props => props.alt ? 'black' : 'white' };
+    }
+`;
+
 
 class App extends Component {
 
@@ -74,19 +90,6 @@ class App extends Component {
     };
 
     render() {
-        // in-line style
-        const style = {
-            backgroundColor: 'green',
-            color: 'white',
-            font: 'inherit',
-            border: '1px solid blue',
-            padding: '8px',
-            cursor: 'pointer',
-            ':hover': {  // Radium lets you do this
-                backgroundColor: 'lightgreen',
-                color: 'black'
-            }
-        };
 
         const charList = this.state.textLengthString.split('').map((ch,index) => {
             return (<CharComponent
@@ -111,11 +114,11 @@ class App extends Component {
                 </div>
             );
 
-            style.backgroundColor = 'red';
-            style[':hover'] = {  // Radium feature
-                backgroundColor: 'salmon',
-                color: 'black'
-            }
+            // style.backgroundColor = 'red';
+            // style[':hover'] = {  // Radium feature
+            //     backgroundColor: 'salmon',
+            //     color: 'black'
+            // }
         }
 
         const classes = [];
@@ -147,11 +150,11 @@ class App extends Component {
 
                 <h2>Lists and Handlers</h2>
                 <p>{this.state.otherState}</p>
-                <button
-                    style={style}
+                <StyledButton
+                    alt={this.state.showPersons}
                     onClick={this.togglePersonHandler}>
                     Toggle People
-                </button>
+                </StyledButton>
 
                 { persons }
 
