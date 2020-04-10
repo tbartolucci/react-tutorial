@@ -23,3 +23,12 @@
    background-color: lightgreen;
    color: white;
  }
+
+.Button.Red {
+    background-color: red;
+    color: black;
+}
+
+.Button.Red:hover {
+    background-color: salmon;
+}

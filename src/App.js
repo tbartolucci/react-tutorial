@@ -82,6 +82,7 @@ class App extends Component {
                     text={ch} />);
         });
 
+        let buttonClass = [classes.Button];
         let persons = null;
         if ( this.state.showPersons ) {
             persons = (
@@ -98,6 +99,7 @@ class App extends Component {
                 </div>
             );
 
+            buttonClass.push(classes.Red);
         }
 
         const assignedClasses = [];
@@ -129,7 +131,11 @@ class App extends Component {
 
                 <h2>Lists and Handlers</h2>
                 <p>{this.state.otherState}</p>
-                <button className={classes.Button} onClick={this.togglePersonHandler}>Toggle People</button>
+                <button
+                    className={buttonClass.join(' ')}
+                    onClick={this.togglePersonHandler}>
+                    Toggle People
+                </button>
 
                 { persons }
 
