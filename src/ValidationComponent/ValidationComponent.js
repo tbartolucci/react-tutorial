@@ -1,12 +1,12 @@
 import React from 'react';
-import './ValidationComponent.css';
+import styles from  './ValidationComponent.css';
 
 const validationComponent = (props) => {
-    let style = 'InvalidText';
+    let style = styles.InvalidText;
     let message = 'Too Short';
     if( props.length > 5 ){
         message = 'Too Long';
-        style = 'ValidText';
+        style = styles.ValidText;
     }
     return (
         <div className={style}>{message}</div>

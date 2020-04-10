@@ -1,12 +1,12 @@
 import React from 'react';
-import './UserInput.css';
+import styles from  './UserInput.css';
 
 const userInput = ( props ) => {
     return (
         <div>
             <p>Username</p>
             <p><input
-                className="UserInput"
+                className={styles.UserInput}
                 type="text"
                 onChange={props.changed}
                 value={props.username}

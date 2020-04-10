@@ -1,9 +1,9 @@
 import React from 'react';
-import './UserOutput.css';
+import styles from './UserOutput.css';
 
 const userOutput = ( props ) => {
     return (
-        <div className="UserOutput">
+        <div className={styles.UserOutput}>
             <p>Username: {props.username}</p>
             <p>More Random TExt!</p>
         </div>
