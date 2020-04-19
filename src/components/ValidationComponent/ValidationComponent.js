@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from  './ValidationComponent.css';
+import styles from './ValidationComponent.css';
 
 const validationComponent = (props) => {
     let style = styles.InvalidText;
