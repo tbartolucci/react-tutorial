@@ -3,8 +3,8 @@ import classes from './App.css';
 import PersonList from '../components/PersonList/PersonList';
 import UserInput from '../components/UserInput/UserInput';
 import UserOutput from '../components/UserOutput/UserOutput';
-import ValidationComponent from '../components/ValidationComponent/ValidationComponent';
 import CharComponent from '../components/CharComponent/CharComponent';
+import Cockpit from '../components/Cockpit/Cockpit';
 
 class App extends Component {
 
@@ -108,30 +108,16 @@ class App extends Component {
 
         return (
             <div className={classes.App}>
-                <h1>React App</h1>
-                <p className={assignedClasses.join(' ')}>This is really working!</p>
-                <h2>Assignment</h2>
-                <p><input
-                    type="text"
-                    onChange={this.textLengthHandler}
-                    value={this.state.textLengthString}
-                    placeholder="How long is this?"
+                <Cockpit
+                    assignedClasses={assignedClasses}
+                    textLengthHandler={this.textLengthHandler}
+                    textLengthString={this.state.textLengthString}
+                    textLength={this.state.textLength}
+                    otherState={this.state.otherState}
+                    togglePersonHandler={this.togglePersonHandler}
+                    buttonClass={buttonClass}
+                    charList={charList}
                 />
-                </p>
-                <p>Count: {this.state.textLength}</p>
-                <ValidationComponent
-                    length={this.state.textLength}
-                />
-
-                {charList}
-
-                <h2>Lists and Handlers</h2>
-                <p>{this.state.otherState}</p>
-                <button
-                    className={buttonClass}
-                    onClick={this.togglePersonHandler}>
-                    Toggle People
-                </button>
 
                 { persons }
 
