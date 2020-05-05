@@ -8,6 +8,10 @@ import Cockpit from '../components/Cockpit/Cockpit';
 
 class App extends Component {
 
+    constructor(props){
+        super(props);
+        console.log('[App.js] constructor');
+    }
     // example state
     state = {
         persons : [
@@ -73,8 +77,17 @@ class App extends Component {
         this.setState({textLengthString: updatedText, textLength: updatedText.length});
     };
 
-    render() {
+    static getDerivedStateFromProps(props, state){
+        console.log('[App.js] getDerivedStateFromPRops',props);
+        return state;
+    }
 
+    componentDidMount(){
+        console.log('[App.js] componentDidMount');
+    }
+
+    render() {
+        console.log('[App.js] render');
         const charList = this.state.textLengthString.split('').map((ch,index) => {
             return (<CharComponent
                     key={index}
