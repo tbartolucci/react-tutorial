@@ -1,27 +1,7 @@
-import React, {Component} from 'react';
+import React, {PureComponent} from 'react';
 import Person from "./Person/Person";
 
-class PersonList extends Component {
-    static getDerivedStateFromProps(props, state) {
-        console.log('[PersonList.js] getDerivedStateFromProps');
-        return state;
-    }
-
-    shouldComponentUpdate(nextProps, nextState, nextContext) {
-        console.log('[PersonList.js] shouldComponentUpdate');
-        console.log('[PersonList.js] Compare nextState to existing state');
-        return nextProps.persons !== this.props.persons;
-    }
-
-    getSnapshotBeforeUpdate(prevProps, prevState) {
-        console.log('[PersonList.js] getSnapshotBeforeUpdate');
-        return {message: 'Snapshot!'};
-    }
-
-    componentDidUpdate(prevProps, prevState, snapshot) {
-        console.log('[PersonList.js] componentDidUpdate');
-        console.log(snapshot);
-    }
+class PersonList extends PureComponent {
 
     render() {
         return this.props.persons.map((person, index) => {
